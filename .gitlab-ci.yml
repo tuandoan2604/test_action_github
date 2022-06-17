@@ -18,8 +18,7 @@ publish:
     - docker push $TAG_LATEST
   interruptible: true
   only:
-    refs:
-      - main
+    - main
 
 deploy:
   image: alpine:latest
@@ -38,10 +37,9 @@ deploy:
   script:
     - ssh -o StrictHostKeyChecking=no -l root 45.32.106.84 "docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY"
     - ssh -o StrictHostKeyChecking=no -l root 45.32.106.84 "docker pull  $TAG_COMMIT"
-    - ssh -o StrictHostKeyChecking=no -l root 45.32.106.84 "docker stop web-steel || true"
-    - ssh -o StrictHostKeyChecking=no -l root 45.32.106.84 "docker rm web-steel || true"
-    - ssh -o StrictHostKeyChecking=no -l root 45.32.106.84 "docker run -dit --restart=always -p 8080:80 --memory="4g" --name web-steel $TAG_COMMIT"
+    - ssh -o StrictHostKeyChecking=no -l root 45.32.106.84 "docker stop meta-hall || true"
+    - ssh -o StrictHostKeyChecking=no -l root 45.32.106.84 "docker rm meta-hall || true"
+    - ssh -o StrictHostKeyChecking=no -l root 45.32.106.84 "docker run -dit --restart=always -p 8080:80 --memory="4g" --name meta-hall $TAG_COMMIT"
 
   only:
-    refs:
-      - main
+    - main
