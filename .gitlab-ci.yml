@@ -9,7 +9,7 @@ variables:
 publish:
   image: docker:20.10.3
   services:
-    - docker:18.09.7-din
+    - docker:18.09.7-dind
   stage: publish
   script:
     - docker build -t $TAG_COMMIT -t $TAG_LATEST .
